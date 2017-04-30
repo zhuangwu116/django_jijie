@@ -7,7 +7,9 @@ class AllenDateNode(template.Node):
     def __init__(self,format_string):
         self.format_string=format_string
     def render(self, context):
-        return datetime.now().strftime(self.format_string)
+        now=datetime.now().strftime(self.format_string)
+        context['mytime']=now
+        return ""
 @register.tag(name='dateAllen')
 def dateAllen(parse,token):
     try:

@@ -4,17 +4,24 @@ from datetime import datetime
 register=template.Library()
 
 class AllenDateNode(template.Node):
-    def __init__(self,format_string):
+    def __init__(self,format_string,asvar):
         self.format_string=format_string
+        self.asvar=asvar
+
     def render(self, context):
         now=datetime.now().strftime(self.format_string)
-        context['mytime']=now
-        return ""
+        if self.asvar:
+            context[self.asvar]=now
+            return ""
+        else:
+            return now
 @register.tag(name='dateAllen')
 def dateAllen(parse,token):
-    try:
-        tag_name,format_string=token.split_contents()
-    except ValueError:
-        raise template.TemplateSyntaxError("%r tag requires a single argument" % token.contents.split()[0])
-    return AllenDateNode(format_string[1:-1])
+    args=token.split_contents()
+    asvar=None
+    if len(args)==4 and args[-2]=='as':
+        asvar=args[-1]
+    elif len(args)!=2:
+        raise template.TemplateSyntaxError('invalid args error')
+    return AllenDateNode(args[1][1:-1],asvar)
 # register.tag(name='dateAllen',compile_function=dateAllen)

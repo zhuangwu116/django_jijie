@@ -7,8 +7,8 @@
 <body>
 <h1>Hello,Django</h1>
 {% load poll_extras %}
-{% dateAllen "%Y-%m-%d %I:%M %p" %}
+{% dateAllen "%Y-%m-%d %I:%M %p" as allentime %}
 <br>
-<p>it is {{ mytime }}</p>
+<p>it is {{ allentime }}</p>
 </body>
 </html>

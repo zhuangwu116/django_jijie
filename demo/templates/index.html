@@ -11,5 +11,10 @@
 <br>
 <p>it is {{ allentime }}</p>
 {% poems_of_author '小明' %}
+{% load poll_extras %}
+{{ 'all en'| cut_filter:' ' }}
+{% with '<h1>hello,</h1>' as tmpValue %}
+    <p>{{ tmpValue|capfirst|add:'world' }}</p>
+{% endwith %}
 </body>
 </html>

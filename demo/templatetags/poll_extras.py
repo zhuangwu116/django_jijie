@@ -1,6 +1,8 @@
 from django import template
 from demo.models import *
 from datetime import datetime
+from django.template.defaultfilters import stringfilter
+from django.utils.safestring import mark_safe
 register=template.Library()
 
 # class AllenDateNode(template.Node):
@@ -32,3 +34,13 @@ def get_current_time(format_string):
 def poems_of_author(name):
     poems=Book.objects.filter(authors__name=name)
     return {"poems":poems,"name":name}
+@register.filter()
+def cut_filter(value,arg):
+    return value.replace(arg,'')
+@register.filter()
+@stringfilter
+def lower(value):
+    return value.lower()
+@register.filter(is_safe=True)
+def add(value,arg):
+    return mark_safe('%s %s'%(value,arg))

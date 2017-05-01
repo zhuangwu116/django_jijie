@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'demo.apps.DemoConfig',
+    'demo2.apps.Demo2Config',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +83,11 @@ DATABASES = {
         'PASSWORD': 'zhuangwu',
         'HOST': 'localhost',
         'PORT':'3306',
-    }
+    },
+    'db1':{
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR,'db.sqlite3'),
+    },
 }
 
 
@@ -126,6 +131,11 @@ STATIC_URL = '/static/'
 STATIC_DIR=[
     os.path.join(BASE_DIR,'static'),
 ]
+DATABASES_APPS_MAPPING={
+    'demo','default',
+    'demo2','db1',
+}
+DATABASES_ROUTERS=['django_jijie.database_app_router.DatabaseAppsRouter',]
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

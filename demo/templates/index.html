@@ -6,15 +6,8 @@
 </head>
 <body>
 <h1>Hello,Django</h1>
-{% load poll_extras %}
-{% get_current_time "%Y-%m-%d %I:%M %p" as allentime %}
-<br>
-<p>it is {{ allentime }}</p>
-{% poems_of_author '小明' %}
-{% load poll_extras %}
-{{ 'all en'| cut_filter:' ' }}
-{% with '<h1>hello,</h1>' as tmpValue %}
-    <p>{{ tmpValue|capfirst|add:'world' }}</p>
-{% endwith %}
+{% for i in tmpValue %}
+    {{ i }}
+{% endfor %}
 </body>
 </html>

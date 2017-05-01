@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ showType }}
+<br>
+{% for pub in publisherList %}
+    <p>==========================================</p>
+    {{ pub.name }}
+    <br>
+     {{ pub.address }}
+    <br>
+     {{ pub.city }}
+    <br>
+     {{ pub.state_province }}
+    <br>
+     {{ pub.country }}
+    <br>
+     {{ pub.website }}
+    <br>
+{% endfor %}
+</body>
+</html>

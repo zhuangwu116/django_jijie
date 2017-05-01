@@ -18,4 +18,5 @@ from demo import views
 
 urlpatterns = [
     url(r'^index/$',views.index,name='index'),
+    url(r'^publisher/$',views.publisher,name='publisher'),
 ]

@@ -4,6 +4,17 @@ from __future__ import unicode_literals
 from django.db import models
 
 # Create your models here.
+class IncompleteCityManager(models.Manager):
+    def get_queryset(self):
+        return super(IncompleteCityManager,self).get_queryset().filter(city='上海')
+class StateProvinceManager(models.Manager):
+    def get_queryset(self):
+        return super(StateProvinceManager,self).get_queryset().filter(state_province='北京')
+class PublisherManager(models.Manager):
+    def cityqueryset(self):
+        return self.filter(city='上海')
+    def stateProvince(self):
+        return self.filter(state_province='北京')
 class Publisher(models.Model):
     name=models.CharField(max_length=30,verbose_name='名称')
     address=models.CharField(max_length=50,verbose_name='地址')
@@ -11,6 +22,10 @@ class Publisher(models.Model):
     state_province=models.CharField(max_length=30,verbose_name='省')
     country=models.CharField(max_length=50,verbose_name='国家')
     website=models.URLField(verbose_name='网址')
+    publisherLists=models.Manager()
+    incompleteCity=IncompleteCityManager()
+    stateProvince=StateProvinceManager()
+    publisherManager=PublisherManager()
     class Meta:
         db_table='demo_publisher'
         verbose_name='出版社'
@@ -48,4 +63,4 @@ class Book(models.Model):
         verbose_name='书籍'
         verbose_name_plural=verbose_name
     def __str__(self):
-        return self.title
+        return self.titl

@@ -1,5 +1,5 @@
 from django import template
-
+from demo.models import *
 from datetime import datetime
 register=template.Library()
 
@@ -28,3 +28,7 @@ register=template.Library()
 @register.assignment_tag()
 def get_current_time(format_string):
     return datetime.now().strftime(format_string)
+@register.inclusion_tag('resultes.html')
+def poems_of_author(name):
+    poems=Book.objects.filter(authors__name=name)
+    return {"poems":poems,"name":name}

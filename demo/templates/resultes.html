@@ -1,0 +1,9 @@
+<ul>
+    <p>{{ name }}</p>
+    {% for poem in poems %}
+        <li>{{ poem.title }}</li>
+        <li>{{ poem.publisher }}</li>
+        <li>{{ poem.publication_date }}</li>
+        <li>{{ poem.price }}</li>
+    {% endfor %}
+</ul>

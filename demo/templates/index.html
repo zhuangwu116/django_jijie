@@ -7,7 +7,20 @@
 <body>
 <h1>Hello,Django</h1>
 {% for i in tmpValue %}
-    {{ i }}
+    {% if i==1 %}
+        {{ i }}
+    {% endif %}
 {% endfor %}
+<div>
+    {{ 1+2 }}
+    {{ 1/2 }}
+    {{ 10%3 }}
+    {{ 2**3 }}
+    {% set tmpInt=10 %}
+    {{ tmpInt }}
+
+    {{ -1|abs }}
+    {{ 'abc'|capitalize|allen_lower }}
+</div>
 </body>
 </html>

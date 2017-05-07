@@ -66,6 +66,7 @@ class Book(models.Model):
         return self.title
 
 def validate_pre(value):
+    print 'validate_pre'
     if not value.startswith('a'):
         raise ValidationError('u must start with a', code='invalid')
 class FormEntry(models.Model):

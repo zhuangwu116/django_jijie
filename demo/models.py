@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+from django.core.validators import ValidationError
 # Create your models here.
 class IncompleteCityManager(models.Manager):
     def get_queryset(self):
@@ -63,7 +63,11 @@ class Book(models.Model):
         verbose_name='书籍'
         verbose_name_plural=verbose_name
     def __str__(self):
-        return self.titl
+        return self.title
+
+def validate_pre(value):
+    if not value.startswith('a'):
+        raise ValidationError('u must start with a', code='invalid')
 class FormEntry(models.Model):
-    author=models.CharField(max_length=10)
+    author=models.CharField(max_length=10,validators=[validate_pre])
     title=models.CharField(max_length=100)

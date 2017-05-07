@@ -13,6 +13,7 @@ def form(request):
         forms=AddForm(request.POST)
         if not forms.is_valid():
             forms = AddForm()
+            print 'invalid'
             return render(request, 'form.html', {'form': forms})
         author=forms.cleaned_data['author']
         title=forms.cleaned_data['title']

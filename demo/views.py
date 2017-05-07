@@ -9,6 +9,14 @@ def index(request):
 
     return render(request,'index.html',{'tmpValue':[1,2,3]})
 def form(request):
+    if request.method=='POST':
+        forms=AddForm(request.POST)
+        if not forms.is_valid():
+            forms = AddForm()
+            return render(request, 'form.html', {'form': forms})
+        author=forms.cleaned_data['author']
+        title=forms.cleaned_data['title']
+        print author,title
     forms=AddForm()
     return render(request,'form.html',{'form':forms})
 def publisher(request):

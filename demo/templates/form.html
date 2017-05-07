@@ -6,9 +6,9 @@
 </head>
 <body>
 <label>增加诗词信息:</label>
-<form action="." method="post">
+<form action="{% url 'forms' %}" method="post">
     {% csrf_token %}
-     {{ form.as_table }}
+     {{ form.as_p }}
     <input type="submit" value="OK">
 </form>
 </body>

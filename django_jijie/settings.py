@@ -57,14 +57,19 @@ ROOT_URLCONF = 'django_jijie.urls'
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates'),
                  os.path.join(os.path.join(BASE_DIR,'demo'),'templates'),
                  os.path.join(os.path.join(BASE_DIR,'demo2'),'templates'),
                  ],
         'APP_DIRS': True,
-        'OPTIONS': {
-            'environment':'demo.jiaja2.environment',
+         'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
         },
     },
 ]

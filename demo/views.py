@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 from demo.models import *
 # Create your views here.
 from .forms import *
@@ -20,5 +20,10 @@ def form(request):
         print author,title
     forms=AddForm()
     return render(request,'form.html',{'form':forms})
+def testlist(request):
+    test=ListTest()
+    test.labels=["python","django"]
+    test.save()
+    return HttpResponse('success')
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})

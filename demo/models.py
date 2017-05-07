@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from demo.fields import *
 from django.core.validators import ValidationError
 # Create your models here.
 class IncompleteCityManager(models.Manager):
@@ -72,3 +73,9 @@ def validate_pre(value):
 class FormEntry(models.Model):
     author=models.CharField(max_length=10,validators=[validate_pre])
     title=models.CharField(max_length=100)
+
+
+class ListTest(models.Model):
+    labels=ListFiled()
+    def __str__(self):
+        return "%s" % self.labels

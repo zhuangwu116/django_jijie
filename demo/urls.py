@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^index/$',views.index,name='index'),
     url(r'^publisher/$',views.publisher,name='publisher'),
     url(r'^forms/$',views.form,name='forms'),
+    url(r'^zidingyifields/$', views.testlist, name='zidingyifields'),
 ]

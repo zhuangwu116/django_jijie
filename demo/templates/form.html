@@ -6,6 +6,7 @@
 </head>
 <body>
 <label>增加诗词信息:</label>
+{{ content.get.csrf_token }}
 <form action="{% url 'forms' %}" method="post">
     {% csrf_token %}
      {{ form.as_p }}

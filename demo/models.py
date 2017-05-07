@@ -64,3 +64,6 @@ class Book(models.Model):
         verbose_name_plural=verbose_name
     def __str__(self):
         return self.titl
+class FormEntry(models.Model):
+    author=models.CharField(max_length=10)
+    title=models.CharField(max_length=100)

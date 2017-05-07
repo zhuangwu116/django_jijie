@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from demo2 import views
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^',include('demo.urls')),
-    url(r'^',include('demo2.urls')),
+    url(r'^/demo2/index/$', views.student, name='index'),
 ]

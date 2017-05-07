@@ -1,16 +1,18 @@
 from django.conf import settings
 class DatabaseAppsRouter(object):
-    def db_for_read(self,model,**hints):
-        app_label=model._mata.app_label
+    def db_for_read(self, model, **hints):
+        app_label=model._meta.app_label
         if app_label in settings.DATABASES_APPS_MAPPING:
             return settings.DATABASES_APPS_MAPPING[app_label]
         return None
-    def db_for_writer(self,model,**hints):
-        app_label=model._mata.app_label
+
+    def db_for_write(self, model, **hints):
+        app_label=model._meta.app_label
         if app_label in settings.DATABASES_APPS_MAPPING:
             return settings.DATABASES_APPS_MAPPING[app_label]
         return None
-    def allow_relation(self,obj1,obj2,**hints):
+
+    def allow_relation(self, obj1, obj2, **hints):
         db_obj1=settings.DATABASES_APPS_MAPPING.get(obj1._mata.app_label)
         db_obj2 = settings.DATABASES_APPS_MAPPING.get(obj2._mata.app_label)
         if db_obj1 and db_obj2:
@@ -19,7 +21,8 @@ class DatabaseAppsRouter(object):
             else:
                 return False
         return None
-    def db_for_migrate(self,db,app_label,model_name=None,**hints):
+
+    def allow_migrate(self, db, app_label, model_name=None, **hints):
         if db in settings.DATABASES_APPS_MAPPING.values():
             return settings.DATABASES_APPS_MAPPING.get(app_label)==db
         elif app_label in settings.DATABASES_APPS_MAPPING:

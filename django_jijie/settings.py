@@ -60,6 +60,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [os.path.join(BASE_DIR,'templates'),
                  os.path.join(os.path.join(BASE_DIR,'demo'),'templates'),
+                 os.path.join(os.path.join(BASE_DIR,'demo2'),'templates'),
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -132,10 +133,11 @@ STATIC_DIR=[
     os.path.join(BASE_DIR,'static'),
 ]
 DATABASES_APPS_MAPPING={
-    'demo','default',
-    'demo2','db1',
+    'demo':'default',
+    'demo2':'db1',
 }
-DATABASES_ROUTERS=['django_jijie.database_app_router.DatabaseAppsRouter',]
+DATABASE_ROUTERS=['django_jijie.database_app_router.DatabaseAppsRouter',]
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

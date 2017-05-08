@@ -23,6 +23,7 @@ def form(request):
 def testlist(request):
     test=ListTest()
     test.labels=["python","django"]
+    test.labels.append('allen')
     test.save()
     return HttpResponse('success')
 def publisher(request):

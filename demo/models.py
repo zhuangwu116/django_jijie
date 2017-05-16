@@ -70,9 +70,16 @@ def validate_pre(value):
     print 'validate_pre'
     if not value.startswith('a'):
         raise ValidationError('u must start with a', code='invalid')
+
+
 class FormEntry(models.Model):
     author=models.CharField(max_length=10,validators=[validate_pre])
     title=models.CharField(max_length=100)
+    def __str__(self):
+        return self.author
+    class Meta:
+        verbose_name = '高级测试'
+        verbose_name_plural = verbose_name
 
 
 class ListTest(models.Model):

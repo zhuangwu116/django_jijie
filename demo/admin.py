@@ -5,6 +5,7 @@ from django.contrib import admin
 from demo.models import *
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from demo.forms import *
 # Register your models here.
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
@@ -31,6 +32,10 @@ class MyUserAdmin(UserAdmin):
     list_filter = ('is_staff',)
     search_fields = ('last_name',)
 # admin.site.register(Publisher,PublisherAdmin)
+class AddFormAdmin(admin.ModelAdmin):
+    forms=AddForm
+admin.site.register(FormEntry,AddFormAdmin)
 admin.site.register(Author)
 admin.site.register(AuthorDetail)
 admin.site.register(Book)
+

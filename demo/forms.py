@@ -2,10 +2,19 @@
 from django import forms
 from .models import FormEntry
 from django.core.validators import ValidationError
+class SubInputText(forms.TextInput):
+    class Media:
+        css={
+            'all': ('input.css',)
+        }
 class AddForm(forms.ModelForm):
     class Meta:
         model=FormEntry
         fields=['author','title']
+        widgets={
+            'author':forms.Textarea(attrs={'cols':'20','row':1}),
+            'title':SubInputText(),
+        }
     # def clean_author(self):
     #     print ('clean author')
     #     data=self.cleaned_data['author']

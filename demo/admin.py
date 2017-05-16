@@ -11,7 +11,9 @@ class PublisherAdmin(admin.ModelAdmin):
     list_display = ('name','country','state_province','city','website',)
     search_fields = ('name','city',)
     list_filter = ('state_province',)
+
     ordering = ('-id',)
+    change_form_template = 'change_form.html'
     # exclude = ('name','address',)
     fieldsets = (
         (None, {

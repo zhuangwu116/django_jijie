@@ -6,6 +6,8 @@ from demo.models import *
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from demo.forms import *
+from django.shortcuts import render
+from .forms import SetCityForm
 # Register your models here.
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
@@ -30,9 +32,17 @@ class PublisherAdmin(admin.ModelAdmin):
             print(qs)
 
     def set_type_action(self, request, queryset):
-        for qs in queryset:
-            qs.city = '上海'
-            qs.save()
+        if request.POST.get('post'):
+            form=SetCityForm(request.POST)
+            if form.is_valid():
+                city=form.cleaned_data['city']
+            for qs in queryset:
+                qs.city = city
+                qs.save()
+        else:
+            return render(request,'set_city.html',
+                    {'form':SetCityForm(initial={'_selected_action':request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
+                     ,'objects':queryset})
         self.message_user(request,"%s pusher were changed with city 上海" % len(queryset))
     set_type_action.short_description = 'just_test'
     actions = [print_publisher, set_type_action]

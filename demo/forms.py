@@ -27,3 +27,6 @@ class AddForm(forms.ModelForm):
         object=FormEntry.objects.filter(author=author,title=title)
         if object:
             raise ValidationError('no in allen')
+class SetCityForm(forms.Form):
+    city=forms.CharField()
+    _selected_action=forms.CharField(widget=forms.MultipleHiddenInput)

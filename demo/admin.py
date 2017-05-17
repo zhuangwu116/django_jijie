@@ -13,7 +13,8 @@ def print_publisher(modeladmin,request,queryset):
 def set_type_action(modeladmin,request,queryset):
     for qs in queryset:
         qs.city='上海'
-        qs.save
+        qs.save()
+set_type_action.short_description='just_test'
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
     list_display = ('name','country','state_province','city','website',)

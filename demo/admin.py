@@ -7,12 +7,19 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from demo.forms import *
 # Register your models here.
+def print_publisher(modeladmin,request,queryset):
+    for qs in queryset:
+        print(qs)
+def set_type_action(modeladmin,request,queryset):
+    for qs in queryset:
+        qs.city='上海'
+        qs.save
 @admin.register(Publisher)
 class PublisherAdmin(admin.ModelAdmin):
     list_display = ('name','country','state_province','city','website',)
     search_fields = ('name','city',)
     list_filter = ('state_province',)
-
+    actions = [print_publisher,set_type_action]
     ordering = ('-id',)
     change_form_template = 'change_form.html'
     # exclude = ('name','address',)

@@ -44,6 +44,11 @@ class PublisherAdmin(admin.ModelAdmin):
                     {'form':SetCityForm(initial={'_selected_action':request.POST.getlist(admin.ACTION_CHECKBOX_NAME)})
                      ,'objects':queryset})
         self.message_user(request,"%s pusher were changed with city 上海" % len(queryset))
+    def get_actions(self, request):
+        actions=super(PublisherAdmin,self).get_actions(request)
+        if 'hello' in actions:
+            del actions['hello']
+        return actions
     set_type_action.short_description = 'just_test'
     actions = [print_publisher, set_type_action]
 admin.site.unregister(User)

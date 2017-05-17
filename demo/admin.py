@@ -63,3 +63,4 @@ admin.site.register(AuthorDetail)
 admin.site.register(Book)
 
 admin.site.add_action(say_hello,'hello')
+admin.site.disable_action('delete_selected')

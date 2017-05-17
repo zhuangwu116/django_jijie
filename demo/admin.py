@@ -55,8 +55,11 @@ class MyUserAdmin(UserAdmin):
 # admin.site.register(Publisher,PublisherAdmin)
 class AddFormAdmin(admin.ModelAdmin):
     forms=AddForm
+def say_hello(modeladmin,request,queryset):
+    print('hello')
 admin.site.register(FormEntry,AddFormAdmin)
 admin.site.register(Author)
 admin.site.register(AuthorDetail)
 admin.site.register(Book)
 
+admin.site.add_action(say_hello,'hello')

@@ -33,6 +33,7 @@ class PublisherAdmin(admin.ModelAdmin):
         for qs in queryset:
             qs.city = '上海'
             qs.save()
+        self.message_user(request,"%s pusher were changed with city 上海" % len(queryset))
     set_type_action.short_description = 'just_test'
     actions = [print_publisher, set_type_action]
 admin.site.unregister(User)

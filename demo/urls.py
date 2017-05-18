@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from demo import views
-
+from django.views.generic import TemplateView,RedirectView
 urlpatterns = [
     url(r'^index/$',views.index,name='index'),
     url(r'^publisher/$',views.publisher,name='publisher'),
     url(r'^forms/$',views.form,name='forms'),
     url(r'^zidingyifields/$', views.testlist, name='zidingyifields'),
+    url(r'^tasks/$', views.ShowTasksView.as_view(), name='tasks'),
 ]

@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render,HttpResponse
 from demo.models import *
+from django.views.generic import TemplateView,ListView
 # Create your views here.
 from .forms import *
 def index(request):
@@ -26,5 +27,9 @@ def testlist(request):
     test.labels.append('allen')
     test.save()
     return HttpResponse('success')
+
+class ShowTasksView(ListView):
+    template_name = 'task_list.html'
+    model = Publisher
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})

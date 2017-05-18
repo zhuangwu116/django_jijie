@@ -29,7 +29,7 @@ def testlist(request):
     return HttpResponse('success')
 
 class ShowTasksView(ListView):
-    template_name = 'task_list.html'
+    template_name = 'task.html'
     model = Publisher
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})

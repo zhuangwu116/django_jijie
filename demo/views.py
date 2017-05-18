@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,HttpResponse,HttpResponseRedirect
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse
 from demo.models import *
-from django.views.generic import TemplateView,ListView
+from django.views.generic import TemplateView,ListView,View
 # Create your views here.
 from .forms import *
+def success(request):
+    return render(request,'success.html',locals())
 def index(request):
 
     return render(request,'index.html',{'tmpValue':[1,2,3]})
@@ -40,5 +42,13 @@ class DisplaySingleTaskView(TemplateView):
         task_id=self.kwargs.get("task_id",0)
         context['task']=Publisher.publisherLists.get(id=task_id)
         return context
+class AddTaskView(View):
+    def get(self,request):
+        return render(request,'add_task.html',{'form':AddForm})
+    def post(self,request):
+        form=AddTaskForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return HttpResponseRedirect(reverse('success'))
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})

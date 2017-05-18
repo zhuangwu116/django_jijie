@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from .models import FormEntry
+from .models import FormEntry,Publisher
 from django.core.validators import ValidationError
 class SubInputText(forms.TextInput):
     class Media:
@@ -30,3 +30,7 @@ class AddForm(forms.ModelForm):
 class SetCityForm(forms.Form):
     city=forms.CharField()
     _selected_action=forms.CharField(widget=forms.MultipleHiddenInput)
+class AddTaskForm(forms.ModelForm):
+    class Meta:
+        model=Publisher
+        fields=['id','name',]

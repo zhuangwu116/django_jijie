@@ -23,4 +23,6 @@ urlpatterns = [
     url(r'^zidingyifields/$', views.testlist, name='zidingyifields'),
     url(r'^tasks/$', views.ShowTasksView.as_view(), name='tasks'),
     url(r'^task/(?P<task_id>\d+)/$', views.DisplaySingleTaskView.as_view(), name='tasks'),
+    url(r'^success',views.success,name='success'),
+    url(r'^addtask',views.AddTaskView.as_view(),name='addtask'),
 ]

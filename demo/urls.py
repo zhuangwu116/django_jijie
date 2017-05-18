@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^forms/$',views.form,name='forms'),
     url(r'^zidingyifields/$', views.testlist, name='zidingyifields'),
     url(r'^tasks/$', views.ShowTasksView.as_view(), name='tasks'),
+    url(r'^task/(?P<task_id>\d+)/$', views.DisplaySingleTaskView.as_view(), name='tasks'),
 ]

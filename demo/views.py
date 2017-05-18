@@ -32,5 +32,13 @@ class ShowTasksView(ListView):
     template_name = 'task.html'
     model = Publisher
     context_object_name = 'my_favorite_publishers'
+class DisplaySingleTaskView(TemplateView):
+    template_name = 'single_task.html'
+    context_object_name='task'
+    def get_context_data(self, **kwargs):
+        context=super(DisplaySingleTaskView,self).get_context_data(**kwargs)
+        task_id=self.kwargs.get("task_id",0)
+        context['task']=Publisher.publisherLists.get(id=task_id)
+        return context
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})

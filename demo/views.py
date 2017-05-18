@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect
 from demo.models import *
 from django.views.generic import TemplateView,ListView
 # Create your views here.
@@ -31,5 +31,6 @@ def testlist(request):
 class ShowTasksView(ListView):
     template_name = 'task.html'
     model = Publisher
+    context_object_name = 'my_favorite_publishers'
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})

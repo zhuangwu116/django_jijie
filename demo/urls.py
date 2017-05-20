@@ -30,4 +30,5 @@ urlpatterns = [
     url(r'^rest_framework/$',views.PublisherListView.as_view(),name='rest'),
     url(r'^rest_framework/(?P<pk>[0-9]+)$',views.publisher_detail,name='publisher_detail'),
     url(r'^signal/$',views.signal_view,name='signal'),
+    url(r'^disconnect_signal/$', views.disconnect_signal, name='disconnect_signal'),
 ]

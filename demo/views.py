@@ -135,4 +135,7 @@ def publisher_detail(request,pk):
 def signal_view(request):
     signals.signalAllen.send(sender=None,allen='test')
     return HttpResponse("signals")
+def disconnect_signal(request):
+    signals.signalAllen.disconnect(signals.signal_callback)
+    return HttpResponse("注销成功")
 

@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^task/(?P<task_id>\d+)/$', views.DisplaySingleTaskView.as_view(), name='tasks'),
     url(r'^success',views.success,name='success'),
     url(r'^addtask',views.AddTaskView.as_view(),name='addtask'),
+    url(r'^ajax',views.more_publisher,name='ajax'),
 ]

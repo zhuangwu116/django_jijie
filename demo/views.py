@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse
+from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse,Http404
 from demo.models import *
 from django.views.generic import TemplateView,ListView,View
 # Create your views here.
@@ -52,3 +52,46 @@ class AddTaskView(View):
         return HttpResponseRedirect(reverse('success'))
 def publisher(request):
     return render(request,'publisher.html',{"showType":"所有的列表","publisherList":Publisher.publisherManager.cityqueryset()})
+
+def more_publisher(request):
+    if request.is_ajax():
+        objects=Publisher.publisherLists.all()
+        data=get_json_objects(objects,Publisher)
+        return HttpResponse(data,content_type='application/json')
+    else:
+        return render(request, 'ajax.html', {})
+
+def json_filed(field_data):
+    if isinstance(field_data,str):
+        return "\""+field_data+"\""
+    if isinstance(field_data,bool):
+        if field_data=='False':
+            return 'false'
+        else:
+            return 'true'
+    return str(field_data)
+def json_encode_dict(dict_data):
+    json_data = "{"
+    for (k,v) in dict_data.items():
+        json_data=json_data+json_filed(k)+": "+json_filed(v)+", "
+    json_data=json_data[:-2]+"}"
+    return json_data
+
+def json_encode_list(list_data):
+    json_res="["
+    for item in list_data:
+        json_res=json_res+json_encode_dict(item)+", "
+    return json_res[:-2]+"]"
+def get_json_objects(objects,model_meta):
+    concrete_model=Publisher._meta.concrete_model
+    list_data=[]
+    for obj in objects:
+        dict_data={}
+        for field in concrete_model._meta.local_fields:
+            if field.name=='id':
+                continue
+            value=field.value_from_object(obj)
+            dict_data[field.name]=value
+        list_data.append(dict_data)
+    data=json_encode_list(list_data)
+    return data

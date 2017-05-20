@@ -1,0 +1,71 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
+     <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript">
+        // using jQuery
+        $(document).ready(function () {
+             function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var csrftoken = getCookie('csrftoken');
+            function csrfSafeMethod(method) {
+                // these HTTP methods do not require CSRF protection
+                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+            }
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                    }
+                }
+            });
+             $('button').click(function () {
+                alert("aa");
+                $.ajax({
+                    type:"GET",
+                    url:{% url 'ajax' %},
+                    dataType:'json',
+                    success:function (data) {
+                        json_str=JSON.stringify(data)
+                        json_data=JSON.parse(json_str)
+                        for (var i in json_data){
+                            item=json_data[i];
+                            $('ul').append('<li>'+item.name+" "+item.address+'</li>');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div>
+    <div class="container">
+        <div class="container">
+            <h3>Publisher</h3>
+            <ul>
+                <li>Results:</li>
+            </ul>
+            <button class="btn get-more" id="more">Get More Publisher</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -24,6 +24,7 @@ class Publisher(models.Model):
     country=models.CharField(max_length=50,verbose_name='国家')
     website=models.URLField(verbose_name='网址')
     publisherLists=models.Manager()
+    objects=models.Manager()
     incompleteCity=IncompleteCityManager()
     stateProvince=StateProvinceManager()
     publisherManager=PublisherManager()

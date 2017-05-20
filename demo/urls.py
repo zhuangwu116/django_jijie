@@ -26,4 +26,8 @@ urlpatterns = [
     url(r'^success',views.success,name='success'),
     url(r'^addtask',views.AddTaskView.as_view(),name='addtask'),
     url(r'^ajax',views.more_publisher,name='ajax'),
+    url(r'^ajax',views.more_publisher,name='ajax'),
+    url(r'^rest_framework/$',views.PublisherListView.as_view(),name='rest'),
+    url(r'^rest_framework/(?P<pk>[0-9]+)$',views.publisher_detail,name='publisher_detail'),
+
 ]

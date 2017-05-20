@@ -4,6 +4,11 @@ from __future__ import unicode_literals
 from django.shortcuts import render,HttpResponse,HttpResponseRedirect,reverse,Http404
 from demo.models import *
 from django.views.generic import TemplateView,ListView,View
+from .serializers import PublisherSerializer
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 # Create your views here.
 from .forms import *
 def success(request):
@@ -95,3 +100,34 @@ def get_json_objects(objects,model_meta):
         list_data.append(dict_data)
     data=json_encode_list(list_data)
     return data
+class PublisherListView(APIView):
+    def get(self,request,format=None):
+        publisher=Publisher.publisherLists.all()
+        serializer=PublisherSerializer(publisher,many=True)
+        return Response(serializer.data)
+    def post(self,request,format=None):
+        serializer=PublisherSerializer(data=request.data,many=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET','PUT','DELETE'])
+def publisher_detail(request,pk):
+    try:
+        publiser=Publisher.objects.get(pk=pk)
+    except Publisher.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    if request.method=='GET':
+        serializer=PublisherSerializer(publiser)
+        return Response(serializer.data)
+    elif request.method=='PUT':
+        serializer=PublisherSerializer(publiser,request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+    elif request.method=='DELETE':
+        publiser.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

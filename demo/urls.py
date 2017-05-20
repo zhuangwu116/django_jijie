@@ -29,5 +29,5 @@ urlpatterns = [
     url(r'^ajax',views.more_publisher,name='ajax'),
     url(r'^rest_framework/$',views.PublisherListView.as_view(),name='rest'),
     url(r'^rest_framework/(?P<pk>[0-9]+)$',views.publisher_detail,name='publisher_detail'),
-
+    url(r'^signal/$',views.signal_view,name='signal'),
 ]

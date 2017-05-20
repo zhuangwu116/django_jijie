@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from demo.fields import *
 from django.core.validators import ValidationError
+from django.utils.translation import ugettext_lazy as _
 # Create your models here.
 class IncompleteCityManager(models.Manager):
     def get_queryset(self):
@@ -75,7 +76,7 @@ def validate_pre(value):
 
 class FormEntry(models.Model):
     author=models.CharField(max_length=10,validators=[validate_pre])
-    title=models.CharField(max_length=100)
+    title=models.CharField(_(u'title'),max_length=100)
     def __str__(self):
         return self.author
     class Meta:

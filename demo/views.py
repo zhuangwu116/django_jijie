@@ -10,6 +10,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from . import signals
+from django.utils.translation import ugettext as _
 # Create your views here.
 from .forms import *
 def success(request):
@@ -138,4 +139,11 @@ def signal_view(request):
 def disconnect_signal(request):
     signals.signalAllen.disconnect(signals.signal_callback)
     return HttpResponse("注销成功")
+def languase(request):
+    return render(request,'languase.html',{'test':_('test')})
+def add_languase(request):
+    if request.method=='GET':
+        return render(request,'add_article_lanuage.html',{'form':AddForm()})
+    else:
+        return HttpResponse(_('ok'))
 

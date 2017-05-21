@@ -11,6 +11,9 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from . import signals
 from django.utils.translation import ugettext as _
+import qiniu
+import uuid
+from django_jijie import settings
 # Create your views here.
 from .forms import *
 def success(request):
@@ -146,4 +149,7 @@ def add_languase(request):
         return render(request,'add_article_lanuage.html',{'form':AddForm()})
     else:
         return HttpResponse(_('ok'))
+def upload(request):
+    key=str(uuid.uuid1()).replace('-','')
+    q=qiniu.Auth(access_key=settings.QINIU_ACCESSKEY,secret_key=settings.QINIU_SECRETKEY)
 

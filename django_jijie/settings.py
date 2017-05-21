@@ -154,7 +154,8 @@ DATABASES_APPS_MAPPING={
     'demo2':'db1',
 }
 DATABASE_ROUTERS=['django_jijie.database_app_router.DatabaseAppsRouter',]
-
+QINIU_ACCESSKEY='zv_7DF4gck0IbHc4wm2AjvYBhZHkkBqJXTL3qwog'
+QINIU_SECRETKEY='kSR8-zjC2Kkro8i-KUf6MAKNbtZAiP-1HDMI-N-B'
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
